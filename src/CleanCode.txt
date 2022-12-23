@@ -1,0 +1,51 @@
+1. Пример раннего связывания:
+        int startPoint = 0;
+
+        for (int i = len - 1; i > -1; i--) {
+            for (int j = i - 1; j > -1; j--) {
+                if (input.charAt(i) > input.charAt(j)) {
+                    strBld.setCharAt(j, input.charAt(i));
+                    strBld.setCharAt(i, input.charAt(j));
+
+                    isLetterGreater = true;
+                    startPoint = j;
+                    break;
+                }
+            }
+
+            if (isLetterGreater) break;
+        }
+
+        if (!isLetterGreater) return "";
+
+        for (int i = startPoint + 1; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (strBld.charAt(i) > strBld.charAt(j)) {
+                    char ch = strBld.charAt(i);
+                    strBld.setCharAt(i, strBld.charAt(j));
+                    strBld.setCharAt(j, ch);
+                }
+            }
+        }
+
+// Переменная связана сразу, потому что дальше работа с переменной идёт в двух циклах,
+поэтому объявление и инициализация произведены непосредственно перед циклом.
+
+
+2. Переменная связывается во время компиляции кода (константа)
+        final String ASCII_TABLE = ...
+        ... // таблица ASCII
+
+        String[] asciiTable = ASCII_TABLE.split("\\s+");
+        asciiTable[0] = " ";
+
+После предыдущих занятий по Чистому коду, все неизменяемые переменные я сделал константами,
+чтобы исключить фактор "магических чисел".
+
+
+3. Если я правильно понял, то связывание во время выполнения программы можно показать используя метод считывающий данные с клавиатуры.
+
+... // много кода
+Scanner keyboard = new Scanner(System.in);
+... // много кода
+final int USER_NAME = keyboard.nextInt();
